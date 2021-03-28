@@ -41,8 +41,6 @@
             android:id="@+id/retrofit_button"
             android:text="@string/Retrofit"
             style="@style/radioButton" />
-
-
     </RadioGroup>
 
     <com.udacity.LoadingButton
