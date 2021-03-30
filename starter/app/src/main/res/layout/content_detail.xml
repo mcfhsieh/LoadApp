@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="40dp"
-        tools:text="File Name:" />
+        android:text="File Name:" />
     <TextView
         android:id="@+id/fileNameText"
         android:layout_width="0dp"
@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@id/fileNameTitle"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="40dp"
-        tools:text="Status:" />
+        android:text="Status:" />
     <TextView
         android:id="@+id/statusText"
         android:layout_width="0dp"
@@ -64,7 +64,7 @@
         android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:text="OK"
+        android:text="OK"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:background="@color/colorAccent"

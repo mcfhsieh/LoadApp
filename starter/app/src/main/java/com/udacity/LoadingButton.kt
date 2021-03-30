@@ -3,17 +3,23 @@ package com.udacity
 import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
+import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
+import androidx.core.content.ContextCompat
+import kotlinx.android.synthetic.main.content_main.view.*
 import kotlin.properties.Delegates
 
 class LoadingButton @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {
+
+
     private var widthSize = 0
     private var heightSize = 0
-
+    private val paint = Paint()
     private val valueAnimator = ValueAnimator()
+
 
     private var buttonState: ButtonState by Delegates.observable<ButtonState>(ButtonState.Completed) { p, old, new ->
 
@@ -25,8 +31,10 @@ class LoadingButton @JvmOverloads constructor(
     }
 
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
+        paint.color = ContextCompat.getColor(this.context, R.color.colorAccent)
+        canvas.drawCircle((width / 6).toFloat(), (height / 2 ).toFloat(), (height /4).toFloat(), paint)
 
     }
 
