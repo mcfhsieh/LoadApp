@@ -3,12 +3,10 @@ package com.udacity
 import android.app.DownloadManager
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
-import android.database.Cursor
 import android.graphics.Color
 import android.net.Uri
 import android.os.Build
@@ -16,15 +14,9 @@ import android.os.Bundle
 import android.os.Environment
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
-import java.net.URL
 
 
 class MainActivity : AppCompatActivity() {
@@ -36,9 +28,6 @@ class MainActivity : AppCompatActivity() {
 
 
     private lateinit var notificationManager: NotificationManager
-    private lateinit var pendingIntent: PendingIntent
-    private lateinit var action: NotificationCompat.Action
-    private lateinit var cursor: Cursor
 
     companion object {
         private const val UDACITY_URL =
@@ -58,6 +47,12 @@ class MainActivity : AppCompatActivity() {
 
         registerReceiver(receiver, IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE))
 
+        custom_button.setOnClickListener {
+            if (url.isNullOrEmpty()){
+                Toast.makeText(this, "Please select the file to download", Toast.LENGTH_SHORT).show()
+            }else download(url)
+        }
+
         downloadSelectionButtons.setOnCheckedChangeListener { _, checkedId ->
             url = when (checkedId) {
                 R.id.glide_button -> GLIDE_URL
@@ -71,11 +66,7 @@ class MainActivity : AppCompatActivity() {
             ),
             getString(R.string.download_channel)
         )
-        custom_button.setOnClickListener {
-            if (url.isNullOrEmpty()) {
-                Toast.makeText(this, "please select the file to download", Toast.LENGTH_SHORT).show()
-            } else download(url)
-        }
+
     }
 
     private fun createChannel(channelId: String, channelName: String) {
@@ -107,12 +98,13 @@ class MainActivity : AppCompatActivity() {
             val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
             if (id == downloadID) {
                 notificationManager.sendNotification(description, title, context)
+                custom_button.finishDownload()
+
             }
         }
     }
 
     private fun download(url: String) {
-
         notificationManager = ContextCompat.getSystemService(
             this,
             NotificationManager::class.java
@@ -146,12 +138,8 @@ class MainActivity : AppCompatActivity() {
                 )
 
         val downloadManager = getSystemService(DOWNLOAD_SERVICE) as DownloadManager
-        var tempID = downloadManager.enqueue(request)
-
-        runBlocking {
-            delay(3000)
-            downloadID = tempID
-        }
+        downloadID = downloadManager.enqueue(request)
+        custom_button.startDownload()
     }
 
     override fun onDestroy() {

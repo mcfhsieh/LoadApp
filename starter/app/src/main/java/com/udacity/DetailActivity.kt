@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.content_detail.*
+import kotlinx.android.synthetic.main.content_detail_screen.*
 
 class DetailActivity : AppCompatActivity() {
 
@@ -27,7 +27,7 @@ class DetailActivity : AppCompatActivity() {
         notificationManager.cancelNotification(id)
         fileNameText.text = title
         statusText.text = status
-        detailNavButton.setOnClickListener {
+        goToMainButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

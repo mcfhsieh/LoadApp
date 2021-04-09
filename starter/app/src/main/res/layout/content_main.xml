@@ -13,7 +13,7 @@
     <ImageView
         android:id="@+id/download_banner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:background="@color/colorPrimaryDark"
         android:src="@drawable/ic_baseline_cloud_download_24"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,11 +33,13 @@
         <RadioButton
             android:id="@+id/glide_button"
             style="@style/radioButton"
+            android:layout_marginBottom="@dimen/radio_margin_bottom"
             android:text="@string/Glide" />
 
         <RadioButton
             android:id="@+id/udacity_button"
             style="@style/radioButton"
+            android:layout_marginBottom="@dimen/radio_margin_bottom"
             android:text="@string/Udacity" />
 
         <RadioButton
@@ -48,10 +50,13 @@
 
     <com.udacity.LoadingButton
         android:id="@+id/custom_button"
-        android:background="@color/colorPrimary"
         android:layout_width="0dp"
         android:layout_height="60dp"
         android:layout_margin="20dp"
+        android:background="@color/colorPrimary"
+        android:clickable="true"
+        app:buttonText="Download"
+        app:isComplete="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

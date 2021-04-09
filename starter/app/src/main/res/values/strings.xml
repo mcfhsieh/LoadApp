@@ -17,4 +17,8 @@
     <string name="download_notification_channel_id">download notification</string>
     <string name="download_notification_channel_description">Check Download Status</string>
     <string name="download_channel">download_channel</string>
+    <string name="downloadingText">We are loading</string>
+    <string name="file_name_text">File Name:</string>
+    <string name="status_text">Status:</string>
+    <string name="ok_button_text">OK</string>
 </resources>
