@@ -87,7 +87,7 @@ class LoadingButton @JvmOverloads constructor(
             addUpdateListener { valueAnim ->
                 val fraction = valueAnim.animatedFraction
                 if (isComplete){
-                    valueAnim.duration = duration - 500
+                    valueAnim.duration = duration - 200
                 }
                 rectWidth = valueAnim.animatedValue as Float
                 fillAngle = rectWidth / widthSize * 360
